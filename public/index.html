@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#00ffff" />
+  <link rel="manifest" href="/manifest.json" />
+  <title>RainSoul258Studios INFINITY 02</title>
+  <style>
+    :root {
+      --cyan: #00ffff;
+      --bg: #020202;
+      --panel: rgba(255, 255, 255, 0.04);
+      --panel-strong: rgba(0, 255, 255, 0.12);
+      --text: #e6fcff;
+      --muted: #8bd4e6;
+      --border: rgba(0, 255, 255, 0.18);
+      --radius: 24px;
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, rgba(0, 255, 255, .08), transparent 22%),
+        linear-gradient(180deg, #07111d 0%, #020202 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(0, 255, 255, 0.05) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    header,
+    main,
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      padding: 1.5rem 1.25rem 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    p.lead {
+      margin: 0.85rem auto 0;
+      max-width: 42rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .layout {
+      display: grid;
+      gap: 1rem;
+      padding: 1rem;
+      max-width: 1320px;
+      margin: 0 auto 2rem;
+    }
+
+    .dashboard,
+    .scanner,
+    .reports {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      backdrop-filter: blur(14px);
+    }
+
+    .dashboard {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .card {
+      padding: 1rem;
+      border: 1px solid rgba(0, 255, 255, 0.1);
+      border-radius: 20px;
+      background: rgba(2, 2, 2, 0.72);
+    }
+
+    .card strong {
+      color: var(--cyan);
+    }
+
+    .grid-2 {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .panel-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .panel-heading h2 {
+      margin: 0;
+      font-size: 1.15rem;
+    }
+
+    .button {
+      appearance: none;
+      border: 1px solid var(--cyan);
+      background: transparent;
+      color: var(--text);
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+      background: rgba(0, 255, 255, 0.12);
+      outline: none;
+    }
+
+    textarea,
+    pre {
+      width: 100%;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.65);
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      padding: 1rem;
+      resize: vertical;
+    }
+
+    textarea {
+      min-height: 18rem;
+    }
+
+    pre {
+      min-height: 12rem;
+      max-height: 22rem;
+      overflow: auto;
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .key-metrics {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .metric {
+      flex: 1 1 12rem;
+      padding: 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .metric h3 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .metric p {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .inline-list {
+      display: grid;
+      gap: 0.9rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .inline-list li {
+      padding: 0.85rem 1rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(0, 255, 255, 0.09);
+    }
+
+    .inline-list li strong {
+      display: block;
+      color: var(--cyan);
+      margin-bottom: 0.35rem;
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .status-pill {
+      padding: 0.65rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(0, 255, 255, 0.1);
+      color: var(--text);
+      font-size: 0.92rem;
+      border: 1px solid rgba(0, 255, 255, 0.15);
+    }
+
+    @media (min-width: 768px) {
+      .layout {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+      .dashboard {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .layout {
+        grid-template-columns: 1.35fr 0.65fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>RainSoul258Studios INFINITY 02</h1>
+    <p class="lead">Forensic-grade Solidity static audit PWA with real-time feedback, Immunefi report export, and mobile-first neon analysis.</p>
+  </header>
+  <main class="layout">
+    <section class="dashboard">
+      <div class="card panel-heading">
+        <div>
+          <h2>Threat Radar</h2>
+          <p>Live bug bounty program summaries and active audit posture.</p>
+        </div>
+        <button class="button" id="refreshRadar">Refresh</button>
+      </div>
+      <ul class="inline-list" id="radarList"></ul>
+      <div class="card">
+        <div class="status-bar">
+          <span class="status-pill">Active</span>
+          <span id="latestStatus" class="status-pill">Idle</span>
+        </div>
+        <div class="key-metrics">
+          <div class="metric"><h3>Findings</h3><p id="metricFindings">0</p></div>
+          <div class="metric"><h3>Critical</h3><p id="metricCritical">0</p></div>
+          <div class="metric"><h3>High</h3><p id="metricHigh">0</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scanner">
+      <div class="panel-heading">
+        <div>
+          <h2>Scan Console</h2>
+          <p>Submit Solidity source and watch the live audit trace.</p>
+        </div>
+        <button class="button" id="runAudit">Run Scan</button>
+      </div>
+      <textarea id="solidityCode" placeholder="Paste Solidity source code here..."></textarea>
+      <div class="card">
+        <div class="panel-heading">
+          <h2>Real-Time Logs</h2>
+        </div>
+        <pre id="logConsole">Awaiting scan command...</pre>
+      </div>
+      <div class="card">
+        <div class="panel-heading">
+          <h2>Report Summary</h2>
+        </div>
+        <pre id="summaryOutput">No report generated yet.</pre>
+      </div>
+    </section>
+
+    <section class="reports">
+      <div class="panel-heading">
+        <div>
+          <h2>Immunefi Markdown</h2>
+          <p>Auto-generated bug bounty report export.</p>
+        </div>
+        <button class="button" id="downloadReport">Download .md</button>
+      </div>
+      <textarea id="reportMarkdown" readonly></textarea>
+    </section>
+  </main>
+
+  <script>
+    const logConsole = document.getElementById('logConsole');
+    const summaryOutput = document.getElementById('summaryOutput');
+    const metricFindings = document.getElementById('metricFindings');
+    const metricCritical = document.getElementById('metricCritical');
+    const metricHigh = document.getElementById('metricHigh');
+    const latestStatus = document.getElementById('latestStatus');
+    const reportMarkdown = document.getElementById('reportMarkdown');
+    const solidityCode = document.getElementById('solidityCode');
+
+    const addLog = (message) => {
+      const timestamp = new Date().toLocaleTimeString();
+      logConsole.textContent += `[${timestamp}] ${message}\n`;
+      logConsole.scrollTop = logConsole.scrollHeight;
+    };
+
+    const loadRadar = async () => {
+      latestStatus.textContent = 'Refreshing radar';
+      const response = await fetch('/radar');
+      const data = await response.json();
+      const radarList = document.getElementById('radarList');
+      radarList.innerHTML = '';
+      data.programs.forEach((program) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${program.name}</strong><span>${program.reward_range} · ${program.scope}</span>`;
+        radarList.appendChild(li);
+      });
+      latestStatus.textContent = 'Radar synced';
+    };
+
+    const runAudit = async () => {
+      const code = solidityCode.value.trim();
+      if (!code) {
+        addLog('Error: no Solidity code found in editor.');
+        latestStatus.textContent = 'Idle';
+        return;
+      }
+
+      latestStatus.textContent = 'Scanning';
+      addLog('Sending code to audit engine...');
+      try {
+        const response = await fetch('/audit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          const report = data.report;
+          summaryOutput.textContent = report.summary;
+          metricFindings.textContent = report.analysis_metrics.issue_count;
+          metricCritical.textContent = report.analysis_metrics.critical;
+          metricHigh.textContent = report.analysis_metrics.high;
+          reportMarkdown.value = data.report_markdown;
+          latestStatus.textContent = 'Scan complete';
+          addLog('Audit response received successfully.');
+        } else {
+          addLog(`Audit failure: ${data.error || 'unexpected error'}`);
+          latestStatus.textContent = 'Error';
+        }
+      } catch (error) {
+        addLog(`Audit exception: ${error.message}`);
+        latestStatus.textContent = 'Offline';
+      }
+    };
+
+    const downloadReportFile = () => {
+      if (!reportMarkdown.value.trim()) {
+        addLog('No report available to download.');
+        return;
+      }
+      const blob = new Blob([reportMarkdown.value], { type: 'text/markdown' });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = 'immunefi-report.md';
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+      URL.revokeObjectURL(url);
+      addLog('Markdown report download started.');
+    };
+
+    document.getElementById('refreshRadar').addEventListener('click', loadRadar);
+    document.getElementById('runAudit').addEventListener('click', runAudit);
+    document.getElementById('downloadReport').addEventListener('click', downloadReportFile);
+
+    const eventSource = new EventSource('/logs');
+    eventSource.onmessage = (event) => addLog(event.data);
+    eventSource.onerror = () => {
+      addLog('Live log stream disconnected.');
+      eventSource.close();
+    };
+
+    window.addEventListener('load', async () => {
+      await loadRadar();
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/assets/sw.js').catch(() => addLog('Service worker registration failed.'));
+      }
+    });
+  </script>
+</body>
+</html>

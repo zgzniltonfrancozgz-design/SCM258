@@ -1,0 +1,11 @@
+{
+  "name": "RainSoul258Studios Infinity 02",
+  "short_name": "RainSoul INF02",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020202",
+  "theme_color": "#00ffff",
+  "description": "Forensic-grade Solidity audit PWA with automated Immunefi report output.",
+  "categories": ["security", "tools", "audit"],
+  "orientation": "portrait-primary"
+}
